@@ -6,8 +6,8 @@ import {
   AbstractControl
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../_service/user.service';
-import { User } from '../_model/user';
+import { UserService } from '../_services/user.service';
+import { User } from '../_models/user';
 import { AlertService } from 'src/app/alert/_services/alert.service';
 
 @Component({
