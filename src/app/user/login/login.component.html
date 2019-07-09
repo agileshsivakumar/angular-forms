@@ -1,7 +1,4 @@
-<div class="col-9">
-  <br />
-  <div class="text-center">Sing In</div>
-  <br />
+<div class="col-9 as-form">
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" class="form-control" [(ngModel)]="username" />
@@ -9,7 +6,12 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" [(ngModel)]="password" />
+    <input
+      type="password"
+      autocomplete="new-password"
+      class="form-control"
+      [(ngModel)]="password"
+    />
   </div>
 
   <div class="text-center form-group">

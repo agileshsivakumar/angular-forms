@@ -18,18 +18,38 @@ export class LoginComponent {
     private alertService: AlertService
   ) {}
 
-  signIn() {
-    if (this.userService.authenticateUser(this.username, this.password)) {
-      this.router.navigateByUrl('/dashboard');
-    } else {
-      this.alertService.push({
-        message: 'User not authenticated',
-        type: 'error'
-      });
+  public signIn(): void {
+    if (this.isValidationSuccessful()) {
+      if (this.userService.authenticateUser(this.username, this.password)) {
+        this.router.navigateByUrl('/dashboard');
+      } else {
+        this.alertService.push({
+          message: 'User not authenticated',
+          type: 'error'
+        });
+      }
     }
   }
 
-  signUp() {
+  public isValidationSuccessful(): boolean {
+    if (!this.username || this.username.length === 0) {
+      this.alertService.push({
+        message: 'Please enter user name',
+        type: 'error'
+      });
+      return false;
+    }
+    if (!this.password || this.password.length === 0) {
+      this.alertService.push({
+        message: 'Please enter password',
+        type: 'error'
+      });
+      return false;
+    }
+    return true;
+  }
+
+  public signUp() {
     this.router.navigate(['/register', 'new', '']);
   }
 }
