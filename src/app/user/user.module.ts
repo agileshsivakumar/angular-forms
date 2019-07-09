@@ -1,14 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegisterComponent } from './register/register.component';
 import { AlertModule } from '../alert/alert.module';
 import { AlertService } from '../alert/_services/alert.service';
+import { CardComponent } from './card/card.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [LoginComponent, DashboardComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    DashboardComponent,
+    RegisterComponent,
+    CardComponent
+  ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, AlertModule],
   providers: [AlertService],
   exports: [LoginComponent, DashboardComponent, RegisterComponent]

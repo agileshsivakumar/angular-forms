@@ -5,9 +5,9 @@ import {
   Validators,
   AbstractControl
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UserService } from '../_services/user.service';
-import { User } from '../_models/user';
+import { User, Mode } from '../_models/user';
 import { AlertService } from 'src/app/alert/_services/alert.service';
 
 @Component({
@@ -17,13 +17,23 @@ import { AlertService } from 'src/app/alert/_services/alert.service';
 })
 export class RegisterComponent {
   public registrationFormGroup: FormGroup;
+  public mode: Mode;
 
   constructor(
     private router: Router,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.buildRegisterationForm();
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      this.mode = params.get('mode') as Mode;
+      if (params.get('emailId')) {
+        this.loadRegistrationForm(
+          this.userService.getUserWithEmail(params.get('emailId'))
+        );
+      }
+    });
   }
 
   public buildRegisterationForm(): void {
@@ -64,6 +74,16 @@ export class RegisterComponent {
     return this.registrationFormGroup.get('password');
   }
 
+  loadRegistrationForm(user: User) {
+    this.firstName.setValue(user.firstName);
+    this.lastName.setValue(user.lastName);
+    this.emailId.setValue(user.emailId);
+    this.username.setValue(user.username);
+    if (this.mode === 'view') {
+      this.registrationFormGroup.disable();
+    }
+  }
+
   public register(): void {
     const user: User = {
       firstName: this.firstName.value,
@@ -79,6 +99,14 @@ export class RegisterComponent {
         message: 'User already exists!',
         type: 'error'
       });
+    }
+  }
+
+  close() {
+    if (this.mode === 'view') {
+      this.router.navigateByUrl('/dashboard');
+    } else {
+      this.router.navigateByUrl('/login');
     }
   }
 }

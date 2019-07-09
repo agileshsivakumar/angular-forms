@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<nav class="navbar navbar-light bg-light">
+  <a *ngIf="userService.getCurrentUser()" class="navbar-brand"
+    >Welcome {{ userService.getCurrentUser().firstName || '' }}</a
+  >
+  <form class="form-inline">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="logout()">
+      Logout
+    </button>
+  </form>
+</nav>
+
+<app-card [users]="userService.users" (viewUser)="viewUser($event)"></app-card>

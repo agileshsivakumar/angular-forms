@@ -11,6 +11,17 @@ export class UserService {
     return this._users;
   }
 
+  public authenticateUser(username: string, password: string) {
+    const user = this._users.find(existingUser => {
+      return existingUser.password === password && existingUser.username === username;
+    });
+    if (user) {
+      user.isCurrentUser = true;
+      return true;
+    }
+    return false;
+  }
+
   public getUserWithEmail(emailId: string): User {
     return this._users.find(user => {
       return user.emailId === emailId;
@@ -20,13 +31,28 @@ export class UserService {
   public saveUser(user: User): boolean {
     if (this._users && this._users.length > 0) {
       const userAlreadyRegistered = this._users.filter(existingUser => {
-        return existingUser.emailId === user.emailId;
+        return existingUser.emailId === user.emailId || existingUser.username === user.username;
       });
-      if (userAlreadyRegistered) {
+      if (userAlreadyRegistered && userAlreadyRegistered.length > 0) {
         return false;
       }
     }
+    user.isCurrentUser = true;
     this._users.push(user);
     return true;
+  }
+
+  public getCurrentUser(): User {
+    return this._users.find(user => {
+      return user.isCurrentUser === true;
+    });
+  }
+
+  public logoutUser() {
+    this._users.filter(user => {
+      if (user.isCurrentUser) {
+        user.isCurrentUser = false;
+      }
+    });
   }
 }
