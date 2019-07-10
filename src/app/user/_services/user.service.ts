@@ -6,17 +6,28 @@ import { User } from '../_models/user';
 })
 export class UserService {
   private _users: User[] = [];
+  private _isUserLoggedIn: boolean;
+
+  constructor() {
+    this._isUserLoggedIn = false;
+  }
 
   get users(): User[] {
     return this._users;
   }
 
-  public authenticateUser(username: string, password: string) {
+  get isUserLoggedIn(): boolean {
+    return this._isUserLoggedIn;
+  }
+
+  public authenticateUser(username: string, password: string): boolean {
     const user = this._users.find(existingUser => {
-      return existingUser.password === password && existingUser.username === username;
+      return (
+        existingUser.password === password && existingUser.username === username
+      );
     });
     if (user) {
-      user.isCurrentUser = true;
+      user.isCurrentUser = this._isUserLoggedIn = true;
       return true;
     }
     return false;
@@ -31,13 +42,16 @@ export class UserService {
   public saveUser(user: User): boolean {
     if (this._users && this._users.length > 0) {
       const userAlreadyRegistered = this._users.filter(existingUser => {
-        return existingUser.emailId === user.emailId || existingUser.username === user.username;
+        return (
+          existingUser.emailId === user.emailId ||
+          existingUser.username === user.username
+        );
       });
       if (userAlreadyRegistered && userAlreadyRegistered.length > 0) {
         return false;
       }
     }
-    user.isCurrentUser = true;
+    user.isCurrentUser = this._isUserLoggedIn = true;
     this._users.push(user);
     return true;
   }
@@ -48,10 +62,10 @@ export class UserService {
     });
   }
 
-  public logoutUser() {
+  public logoutUser(): void {
     this._users.filter(user => {
       if (user.isCurrentUser) {
-        user.isCurrentUser = false;
+        user.isCurrentUser = this._isUserLoggedIn = false;
       }
     });
   }

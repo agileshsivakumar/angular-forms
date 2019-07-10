@@ -7,6 +7,7 @@ import { CardComponent } from './card/card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UtilitiesModule } from '../utilities/utilities.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { RegisterComponent } from './register/register.component';
     RegisterComponent,
     CardComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, AlertModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, AlertModule, UtilitiesModule],
   providers: [AlertService],
   exports: [LoginComponent, DashboardComponent, RegisterComponent]
 })
