@@ -19,10 +19,10 @@ npm start
 
 ## Demo Features
 
-1. `@angular/core` elements like * * Modules, Components, Models and Services * *
-2. `@angular/platform-browser` features like * * ngIf * * and * * ngFor * * and * * data binding * * `{{}}` & `[(ngModel)]`
-2. `@angular/router` features like * * route setup, passing params and auth gaurds * *
+1. `@angular/core` elements like **Modules, Components, Models and Services**
+2. `@angular/platform-browser` features like *ngIf* and *ngFor* and *data binding* `{{}}` & `[(ngModel)]`
+2. `@angular/router` features like *route setup, passing params and auth gaurds*
 4. `@angular/forms` validations
-5. ** Bootstrap ** styling introduction to forms, nav and cards
+5. **Bootstrap** styling introduction to forms, nav and cards
 6. `rxjs` features like Observables and BehaviourSubject
 7. Smart and dumb components using `@Input()` and `@Output()`
