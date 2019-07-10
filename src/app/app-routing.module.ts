@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'register/:mode/:emailId',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'dashboard',
