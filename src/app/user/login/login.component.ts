@@ -24,7 +24,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/dashboard');
       } else {
         this.alertService.push({
-          message: 'User not authenticated',
+          message: 'User not authenticated! Register if you dont have an account',
           type: 'error'
         });
       }
