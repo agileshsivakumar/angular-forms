@@ -17,7 +17,6 @@ export class DashboardComponent {
   }
 
   public viewUser(user: User) {
-    console.log(user);
     this.router.navigate(['/register', 'view', user.emailId]);
   }
 }

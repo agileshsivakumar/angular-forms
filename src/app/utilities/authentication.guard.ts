@@ -21,7 +21,7 @@ export class AuthenticationGuard implements CanActivate {
         break;
       }
       case 'register': {
-        if (next.url[1].path === 'new') {
+        if (next.url[1].path === 'new' || this.userService.isUserLoggedIn) {
           return true;
         }
         break;
