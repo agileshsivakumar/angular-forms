@@ -98,7 +98,7 @@ export class RegisterComponent implements OnDestroy {
     this.phoneNumber.setValue(user.phoneNumber);
     this.username.setValue(user.username);
     if (this.mode === 'view') {
-      // this.registrationFormGroup.disable();
+      this.registrationFormGroup.disable();
     }
   }
 

@@ -17,6 +17,7 @@ export class DashboardComponent {
   }
 
   public viewUser(user: User) {
+    this.userService.selectedUser = user;
     this.router.navigate(['/register', 'view', user.emailId]);
   }
 }

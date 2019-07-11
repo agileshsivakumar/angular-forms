@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { UserService } from 'src/app/user/_services/user.service';
 import { Role } from 'src/app/user/_models/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Directive({
   selector: '[appUserRoles]'
@@ -23,18 +24,28 @@ export class UserRoleDirective implements OnInit {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
-    private userService: UserService
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    let isUserAuthorized = false;
-    this._userRoles.forEach(userRole => {
-      if (this.userService.getCurrentUser().role === userRole) {
-        isUserAuthorized = true;
-        return;
-      }
-    });
+    let isUserAuthorized = true;
 
+    const currentUser = this.userService.getCurrentUser();
+    if (currentUser) {
+      isUserAuthorized = false;
+      this._userRoles.forEach(userRole => {
+        if (currentUser.role === userRole) {
+          if (currentUser.role === 'admin') {
+            isUserAuthorized = true;
+          } else {
+            isUserAuthorized =
+              currentUser.emailId === this.userService.selectedUser.emailId;
+          }
+          return;
+        }
+      });
+    }
     if (isUserAuthorized) {
       if (!this.isControlVisible) {
         this.isControlVisible = true;

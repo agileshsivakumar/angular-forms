@@ -1,4 +1,7 @@
 .card {
   margin: 10px 0px;
-  width: fit-content;
+  width: 300px;
+  .btn {
+    margin-right: 10px;
+  }
 }

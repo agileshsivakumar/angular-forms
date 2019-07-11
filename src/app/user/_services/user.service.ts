@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../_models/user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +8,13 @@ import { User } from '../_models/user';
 export class UserService {
   private _users: User[] = [];
   private _isUserLoggedIn: boolean;
+  public selectedUser: User;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this._isUserLoggedIn = false;
+    this.http.get('assets/users.json').subscribe(users => {
+      this._users = users as User[];
+    });
   }
 
   get users(): User[] {

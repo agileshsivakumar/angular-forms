@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from '../alert/alert.module';
@@ -20,8 +21,8 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     AlertModule,
-    UtilitiesModule
-  ],
-  exports: [LoginComponent, DashboardComponent, RegisterComponent]
+    UtilitiesModule,
+    HttpClientModule
+  ]
 })
 export class UserModule {}
