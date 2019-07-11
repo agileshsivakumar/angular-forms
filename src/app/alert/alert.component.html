@@ -1,12 +1,13 @@
 <div
-  class="col-9"
   *ngIf="alert"
   [ngClass]="{
     alert: alert,
     'alert-success': alert.type === 'success',
     'alert-danger': alert.type === 'error',
     'alert-info': alert.type === 'info',
-    'alert-warning': alert.type === 'warning'
+    'alert-warning': alert.type === 'warning',
+    col: alert.fullPage,
+    'col-9': !alert.fullPage
   }"
 >
   {{ alert.message }}

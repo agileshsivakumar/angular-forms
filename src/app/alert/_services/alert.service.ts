@@ -33,6 +33,7 @@ export class AlertService {
    *
    */
   push(alert: Alert) {
+    alert.fullPage = alert.fullPage || false;
     this.alertSubject.next(alert);
   }
 

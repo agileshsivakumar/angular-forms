@@ -58,8 +58,21 @@ export class UserService {
       }
     }
     user.role = 'user';
-    user.isCurrentUser = this._isUserLoggedIn = true;
+    const currentUser = this.getCurrentUser();
+    currentUser && currentUser.role !== 'admin'
+      ? (user.isCurrentUser = this._isUserLoggedIn = true)
+      : (this._isUserLoggedIn = true);
     this._users.push(user);
+    return true;
+  }
+
+  public deleteUser(userToDelete: User): boolean {
+    if (userToDelete.role === 'admin') {
+      return false;
+    }
+    this._users = this._users.filter(user => {
+      return user.emailId !== userToDelete.emailId;
+    });
     return true;
   }
 
