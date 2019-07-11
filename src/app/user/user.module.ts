@@ -7,15 +7,13 @@ import { CardComponent } from './card/card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { MaskPhoneNumberDirective } from './_directives/mask-phone-number.directive';
 
 @NgModule({
   declarations: [
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
-    CardComponent,
-    MaskPhoneNumberDirective
+    CardComponent
   ],
   imports: [
     CommonModule,

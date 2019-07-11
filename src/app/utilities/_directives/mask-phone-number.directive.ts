@@ -27,7 +27,7 @@ export class MaskPhoneNumberDirective implements OnInit, OnDestroy {
     this._phoneNumberValue = value;
   }
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit() {
     this.maskPhoneNumber();
@@ -39,7 +39,7 @@ export class MaskPhoneNumberDirective implements OnInit, OnDestroy {
 
   private maskPhoneNumber() {
     this.phoneControlValueChangesSubscription = this._phoneNumberControl.valueChanges.subscribe(
-      data => {
+      phoneControlValueChange => {
         const phoneNumber: string = this._phoneNumberValue;
 
         const lastCharacterOfPhoneNumber: string = phoneNumber.substr(
@@ -47,12 +47,12 @@ export class MaskPhoneNumberDirective implements OnInit, OnDestroy {
         );
 
         // remove all mask characters (keep only numeric)
-        let phoneNumberWithoutMask = data.replace(/\D/g, '');
+        let phoneNumberWithoutMask = phoneControlValueChange.replace(/\D/g, '');
 
         let start = this.renderer.selectRootElement('#phone-number-id').selectionStart;
         let end = this.renderer.selectRootElement('#phone-number-id').selectionEnd;
 
-        if (data.length < phoneNumber.length) {
+        if (phoneControlValueChange.length < phoneNumber.length) {
           if (phoneNumber.length < start) {
             if (lastCharacterOfPhoneNumber === ')') {
               phoneNumberWithoutMask = phoneNumberWithoutMask.substr(
@@ -86,7 +86,7 @@ export class MaskPhoneNumberDirective implements OnInit, OnDestroy {
 
           this.renderer.selectRootElement('#phone-number-id').setSelectionRange(start, end);
         } else {
-          const phoneNumberRemoved = data.charAt(start);
+          const phoneNumberRemoved = phoneControlValueChange.charAt(start);
           if (phoneNumberWithoutMask.length === 0) {
             phoneNumberWithoutMask = '';
           } else if (phoneNumberWithoutMask.length <= 3) {
