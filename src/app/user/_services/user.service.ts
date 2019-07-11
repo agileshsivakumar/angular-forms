@@ -44,7 +44,8 @@ export class UserService {
       const userAlreadyRegistered = this._users.filter(existingUser => {
         return (
           existingUser.emailId === user.emailId ||
-          existingUser.username === user.username
+          existingUser.username === user.username ||
+          existingUser.phoneNumber === user.phoneNumber
         );
       });
       if (userAlreadyRegistered && userAlreadyRegistered.length > 0) {

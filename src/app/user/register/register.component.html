@@ -52,6 +52,27 @@
     </div>
 
     <div class="form-group">
+      <label for="phoneNumber">Mobile Number</label>
+      <input
+        id="phone-number-id"
+        type="text"
+        name="phoneNumber"
+        class="form-control"
+        formControlName="phoneNumber"
+        [ngClass]="{ 'is-invalid': phoneNumber.touched && phoneNumber.errors }"
+        appMaskPhoneNumber
+        [phoneNumberControl]="phoneNumber"
+        [phoneNumberValue]="phoneNumber.value"
+      />
+      <div *ngIf="phoneNumber.errors" class="invalid-feedback">
+        <div *ngIf="phoneNumber.errors.required">Mobile Number is required</div>
+        <div *ngIf="phoneNumber.errors.pattern">
+          Enater a valid mobile number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="username">Username</label>
       <input
         type="text"

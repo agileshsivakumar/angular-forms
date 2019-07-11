@@ -23,14 +23,20 @@ npm start
 ```
 @NgModule
 @Component
+@Directive
 @Injectable
+OnInit
+OnDestroy
+ElementRef
+Renderer2
 ```
-2. **@angular/platform-browser** features like
+2. **@angular/common** features like
 ```
 ngIf
 ngFor
 {{}}
 [(ngModel)]
+[ngClass]
 ```
 3. **@angular/router** features like
 ```
@@ -50,7 +56,15 @@ FormGroup
 Validators
 AbstractControl
 ```
-5. **Bootstrap** styling introduction to
+5. **rxjs** features like
+```
+Observables
+Subject
+Subscription
+next()
+asObservable()
+```
+6. **Bootstrap** styling introduction to
 ```
 container
 row
@@ -60,11 +74,5 @@ form-control
 card
 <nav>
 ```
-6. **rxjs** features like
-```
-Observables
-Subject
-next()
-asObservable()
-```
 7. Smart and dumb components using `@Input()` and `@Output()`
+8. *Performace* and *Memory Management* when using `Subscription`

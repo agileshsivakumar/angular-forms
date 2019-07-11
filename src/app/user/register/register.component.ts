@@ -1,23 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
-  Validators,
-  AbstractControl
+  Validators
 } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { UserService } from '../_services/user.service';
-import { User, Mode } from '../_models/user';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/alert/_services/alert.service';
+import { Mode, User } from '../_models/user';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   public registrationFormGroup: FormGroup;
   public mode: Mode;
+  private activatedRouteParamMapSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -26,14 +28,20 @@ export class RegisterComponent {
     private activatedRoute: ActivatedRoute
   ) {
     this.buildRegisterationForm();
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.mode = params.get('mode') as Mode;
-      if (params.get('emailId')) {
-        this.loadRegistrationForm(
-          this.userService.getUserWithEmail(params.get('emailId'))
-        );
+    this.activatedRouteParamMapSubscription = this.activatedRoute.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.mode = params.get('mode') as Mode;
+        if (params.get('emailId')) {
+          this.loadRegistrationForm(
+            this.userService.getUserWithEmail(params.get('emailId'))
+          );
+        }
       }
-    });
+    );
+  }
+
+  ngOnDestroy() {
+    this.activatedRouteParamMapSubscription.unsubscribe();
   }
 
   public buildRegisterationForm(): void {
@@ -47,6 +55,10 @@ export class RegisterComponent {
         Validators.minLength(3)
       ]),
       emailId: new FormControl('', [Validators.required, Validators.email]),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/)
+      ]),
       username: new FormControl('', [
         Validators.required,
         Validators.minLength(3)
@@ -67,6 +79,9 @@ export class RegisterComponent {
   get emailId(): AbstractControl {
     return this.registrationFormGroup.get('emailId');
   }
+  get phoneNumber(): AbstractControl {
+    return this.registrationFormGroup.get('phoneNumber');
+  }
   get username(): AbstractControl {
     return this.registrationFormGroup.get('username');
   }
@@ -78,9 +93,10 @@ export class RegisterComponent {
     this.firstName.setValue(user.firstName);
     this.lastName.setValue(user.lastName);
     this.emailId.setValue(user.emailId);
+    this.phoneNumber.setValue(user.phoneNumber);
     this.username.setValue(user.username);
     if (this.mode === 'view') {
-      this.registrationFormGroup.disable();
+      // this.registrationFormGroup.disable();
     }
   }
 
@@ -89,6 +105,7 @@ export class RegisterComponent {
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       emailId: this.emailId.value,
+      phoneNumber: this.phoneNumber.value,
       username: this.username.value,
       password: this.password.value
     };
