@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MaskPhoneNumberDirective } from './_directives/mask-phone-number.directive';
 import { AuthenticationGuard } from './_services/authentication.guard';
+import { UserRoleDirective } from './_directives/user-role.directive';
 
 @NgModule({
-  declarations: [MaskPhoneNumberDirective],
+  declarations: [MaskPhoneNumberDirective, UserRoleDirective],
   imports: [CommonModule],
   providers: [AuthenticationGuard],
-  exports: [MaskPhoneNumberDirective]
+  exports: [MaskPhoneNumberDirective, UserRoleDirective]
 })
 export class UtilitiesModule {}

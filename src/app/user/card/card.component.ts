@@ -6,13 +6,8 @@ import { User } from '../_models/user';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() users: User[];
-  @Output() viewUser: EventEmitter<any> = new EventEmitter();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  @Output() viewUser: EventEmitter<User> = new EventEmitter();
+  @Output() deleteUser: EventEmitter<User> = new EventEmitter();
 }

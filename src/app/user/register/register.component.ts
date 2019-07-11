@@ -8,8 +8,10 @@ import {
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/alert/_services/alert.service';
-import { Mode, User } from '../_models/user';
+import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
+
+type Mode = 'new' | 'view' | 'edit';
 
 @Component({
   selector: 'app-register',

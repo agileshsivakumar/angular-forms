@@ -8,6 +8,9 @@
           <button class="btn btn-light" (click)="viewUser.emit(user)">
             View
           </button>
+          <button *appUserRoles="['admin']" class="btn btn-light" (click)="deleteUser.emit(user)">
+            Delete
+          </button>
         </div>
       </div>
     </div>

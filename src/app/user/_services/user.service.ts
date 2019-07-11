@@ -52,6 +52,7 @@ export class UserService {
         return false;
       }
     }
+    user.role = 'user';
     user.isCurrentUser = this._isUserLoggedIn = true;
     this._users.push(user);
     return true;

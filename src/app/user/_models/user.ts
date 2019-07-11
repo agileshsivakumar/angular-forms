@@ -5,7 +5,8 @@ export interface User {
   phoneNumber: string;
   username: string;
   password: string;
+  role?: Role;
   isCurrentUser?: boolean;
 }
 
-export type Mode = 'new' | 'view' | 'edit';
+export type Role = 'admin' | 'user' | 'readonly';
