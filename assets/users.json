@@ -1,0 +1,20 @@
+[
+  {
+    "firstName": "Administrator",
+    "lastName": "User",
+    "emailId": "admin@admin.com",
+    "phoneNumber": "(999) 888 1234",
+    "username": "admin",
+    "password": "admin",
+    "role": "admin"
+  },
+  {
+    "firstName": "ReadOnly",
+    "lastName": "User",
+    "emailId": "readonly@readonly.com",
+    "phoneNumber": "(999) 777 4768",
+    "username": "readonly",
+    "password": "readonly",
+    "role": "readonly"
+  }
+]
