@@ -5,10 +5,14 @@
         <div class="card-body">
           <h5 class="card-title">{{ user.firstName + ' ' + user.lastName }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.emailId }}</h6>
-          <button class="btn btn-light" (click)="viewUser.emit(user)">
+          <button class="btn btn-outline-info btn-sm" (click)="viewUser.emit(user)">
             View
           </button>
-          <button *appUserRoles="['admin']" class="btn btn-light" (click)="deleteUser.emit(user)">
+          <button
+            *appUserRoles="['admin']"
+            class="btn btn-outline-warning btn-sm"
+            (click)="deleteUser.emit(user)"
+          >
             Delete
           </button>
         </div>

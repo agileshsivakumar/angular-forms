@@ -59,7 +59,7 @@ export class UserService {
     }
     user.role = 'user';
     const currentUser = this.getCurrentUser();
-    currentUser && currentUser.role !== 'admin'
+    !currentUser || currentUser.role !== 'admin'
       ? (user.isCurrentUser = this._isUserLoggedIn = true)
       : (this._isUserLoggedIn = true);
     this._users.push(user);

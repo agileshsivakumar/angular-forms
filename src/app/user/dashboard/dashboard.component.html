@@ -3,7 +3,11 @@
     >Welcome {{ userService.getCurrentUser().firstName || '' }}</a
   >
   <form class="form-inline">
-    <button class="btn btn-outline-success my-2 my-sm-0" (click)="addUser()">
+    <button
+      *appUserRoles="['admin']"
+      class="btn btn-outline-success my-2 my-sm-0"
+      (click)="addUser()"
+    >
       Add User
     </button>
     <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()">
@@ -12,4 +16,8 @@
   </form>
 </nav>
 
-<app-card [users]="userService.users" (viewUser)="viewUser($event)" (deleteUser)="deleteUser($event)"></app-card>
+<app-card
+  [users]="userService.users"
+  (viewUser)="viewUser($event)"
+  (deleteUser)="deleteUser($event)"
+></app-card>
