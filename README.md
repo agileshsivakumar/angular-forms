@@ -78,6 +78,7 @@ card
 7. Smart and dumb components using `@Input()` and `@Output()`
 8. *Performace* and *Memory Management* when using `Subscription`
 
+Play with it in https://agileshsivakumar.github.io/angular-form
 
 ## Functionality
 1. Already configred a admin *(admin/admin)* user and readonly *(readonly/readonly)* user
